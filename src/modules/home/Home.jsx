@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import FeatureCard from "../../components/featurecard/FeatureCard";
+import Products from "../products/Products";
 import Hero from "../../components/hero/Hero";
-import Products from "../../components/products/Products";
+import ProductCard from '../../components/productcard/ProductCard';
 import StatCard from "../../components/statcard/StatCard";
+import Categories from "../../components/categories/Categories";
 const Home = () => {
 const [products, setProducts] = useState([]);
     useEffect(() => {
@@ -18,17 +19,19 @@ const [products, setProducts] = useState([]);
   return (
     <div>
         <Hero />
+       
         <div className="flex flex-col text-center w-full mt-20">
       <h2 className="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">Products</h2>
       <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900">Most Popular Products</h1>
     </div>
     {
         products.length > 0 ?
-        <Products products={products}/>
+        <ProductCard products={products}/>
         :
         <div>Loading.....</div>
     }
-        <FeatureCard />
+        <Products />
+        <Categories />
         <StatCard />
     </div>
   )
