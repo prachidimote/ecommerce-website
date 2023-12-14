@@ -1,8 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import FormatPrice from "../formatprice/FormatPrice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const SingleProduct = () => {
     const { id } = useParams();
+    // eslint-disable-next-line no-unused-vars
     const navigate = useNavigate();
     const [product, setProduct] = useState({});
    // const {image, title, category, price, description} = product
@@ -35,6 +38,7 @@ const SingleProduct = () => {
     //   }
     // };
 
+    // eslint-disable-next-line no-unused-vars
     const handleCart = (product, redirect) => {
       console.log(product)
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -53,13 +57,20 @@ const SingleProduct = () => {
       } else {
         localStorage.setItem('cart', JSON.stringify([...cart, {...product, quantity: 1}]))
       }
-      alert('Product added to cart')
-      if(redirect) {
-        navigate('/cart')
-      }
+      toast.success('Item Added to Cart', {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+        
     }
  
-    if(!Object.keys(product).length > 0) return <div>Loading.....</div>
+    if(!Object.keys(product).length > 0) return <div><iframe src="https://giphy.com/embed/xTk9ZvMnbIiIew7IpW" width="480" height="480" frameBorder="0" className="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/loop-loading-loader-xTk9ZvMnbIiIew7IpW">via GIPHY</a></p></div>
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -108,34 +119,25 @@ const SingleProduct = () => {
           </div>
           <p className="leading-relaxed">{product?.description}</p>
           <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
-          {/*  <div className="flex">
-              <span className="mr-3">Color</span>
-              <button className="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
-              <button className="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
-              <button className="border-2 border-gray-300 ml-1 bg-indigo-500 rounded-full w-6 h-6 focus:outline-none"></button>
-            </div>
-            <div className="flex ml-6 items-center">
-              <span className="mr-3">Size</span>
-              <div className="relative">
-                {/* <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
-                  <option>SM</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                </select> 
-                <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                  <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4" viewBox="0 0 24 24">
-                    <path d="M6 9l6 6 6-6"></path>
-                  </svg>
-                </span>
-              </div>
-            </div> */}
           </div>
           <div className="flex">
             <span className="title-font font-medium text-2xl text-gray-900 mr-2">{<FormatPrice price = {product?.price} />}</span>
            <div className="flex">
            <button className="flex ml-auto text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded mr-2" onClick={() => handleCart(product, true)}>Buy It Now</button>
-            <button className="flex ml-auto text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded" onClick={() => handleCart(product)}>Add to Cart</button>
+            <button className="flex ml-auto text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded" onClick={() => handleCart(product)}>Add to Cart
+            <ToastContainer
+position="top-right"
+autoClose={1500}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+            </button>
             <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-red-500 ml-3">
             <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
                 <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>  

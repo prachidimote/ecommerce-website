@@ -24,7 +24,7 @@ const Products = () => {
         products.length > 0 ?
       <ProductCard products={products}/>
       :
-      <div>Loading...</div>
+      <div><iframe src="https://giphy.com/embed/xTk9ZvMnbIiIew7IpW" width="480" height="480" frameBorder="0" className="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/loop-loading-loader-xTk9ZvMnbIiIew7IpW">via GIPHY</a></p></div>
 }
     </div>
   )
